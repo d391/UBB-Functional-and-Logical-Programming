@@ -1,0 +1,38 @@
+(defun getRight(tree nodes edges)
+    ;(print tree)
+    ;(print nodes)
+    ;(print edges)
+    ;(terpri)
+    (cond
+        ((> nodes edges) tree)
+        (t(getRight (cdr (cdr tree)) (+ 1 nodes) (+ edges (car (cdr tree)))))
+        )
+    )
+
+(defun getLeft(tree nodes edges)
+    ;(print tree)
+    ;(print nodes)
+    ;(print edges)
+    ;(terpri)
+    (cond
+        ((> nodes edges) nil)
+        (t(append (list (car tree) (cadr tree))(getLeft (cdr (cdr tree)) (+ 1 nodes) (+ edges (car (cdr tree))))))
+        )
+    )
+
+
+;(write (getLeft '(B 2 D 0 E 1 F 2 G 0 H 0 C 2 I 0 J 1 K 0) 0 0))
+
+(defun getPath(tree x)
+    (print tree)
+    (cond
+        ((null tree) nil)
+        ((equal (car tree) x) (list x))
+        ((equal (cadr tree) 2) (cons (car tree) (getPath (getRight (cdr (cdr tree)) 0 0) x)))
+        (t(cons (car tree) (getPath (getLeft (cdr (cdr tree)) 0 0) x)))
+        )
+    )
+
+
+(write (getPath '(A 2 B 2 D 0 E 1 F 2 G 0 H 0 C 2 I 0 J 1 K 0) 'I))
+

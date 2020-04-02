@@ -1,0 +1,8 @@
+
+CL-USER 1 > (define product(list p)
+  (cond
+    ((null list) p)
+    ((numberp (car list)) (product (cdr list) (* p (car list))))
+    (t(product (cdr list) p))
+  )
+)
